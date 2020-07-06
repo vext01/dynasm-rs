@@ -95,8 +95,8 @@ pub use crate::x86::{Rh, Rf, Rm, Rs, RD, RB};
 
 #[cfg(test)]
 mod tests {
-    use super::Rq::*;
-    use crate::Register;
+    use super::{Rq::*, Assembler};
+    use crate::{Register, dynasm};
 
     #[test]
     fn reg_code() {
@@ -106,5 +106,14 @@ mod tests {
     #[test]
     fn reg_code_from() {
         assert_eq!(u8::from(R11), 11);
+    }
+
+    #[test]
+    fn x() {
+        let mut ops = Assembler::new().unwrap();
+        //let reg = RAX;
+        dynasm!(ops,
+            ; xor rax, rax
+        );
     }
 }
